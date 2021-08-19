@@ -39,21 +39,21 @@ function HooksComponent() {
         })();
     }, []);
 
-    const onInputChange = (event) => {
+    const onInputChange = React.useCallback((event) => {
         setValue(event.target.value);
-    }
+    }, []);
 
-    const onItemClick = (value) => {
+    const onItemClick = React.useCallback((value) => {
         return () => setValue(value);
-    }
+    }, []);
 
-    const onFocus = () => {
+    const onFocus = React.useCallback(() => {
         setFocus(true);
-    }
+    }, []);
 
-    const onBlur = () => {
+    const onBlur = React.useCallback(() => {
         setFocus(false);
-    }
+    }, []);
 
     const filteredCountries = countries.filter(country => {
         return country.toLowerCase().includes(value.toLowerCase())
