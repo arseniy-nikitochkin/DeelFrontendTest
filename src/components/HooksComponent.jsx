@@ -12,10 +12,29 @@ const DATA = [
     'Colombia',
 ];
 
+const CountryItem = (props) => {
+    const { country, searchValue, onItemClick } = props;
+    const startIndex = country.toLowerCase().indexOf(searchValue.toLowerCase());
+    const endIndex = startIndex + searchValue.length;
+
+    return (
+        <div
+            className="countries-list-item"
+            onMouseDown={onItemClick(country)} // Using onMouseDown here instead of click for proper work with onBlur
+        >
+            {country.substring(0, startIndex)}
+            <span className="highlight">
+                {country.substring(startIndex, endIndex)}
+            </span>
+            {country.substring(endIndex, country.length)}
+        </div>
+    );
+}
+
 function HooksComponent() {
     const [countries, setCountries] = React.useState([]);
     const [value, setValue] = React.useState('');
-    const [loading, setLoading] = React.useState('');
+    const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState('');
     const [focus, setFocus] = React.useState(false);
 
@@ -72,17 +91,12 @@ function HooksComponent() {
                         onBlur={onBlur}
                         onChange={onInputChange}
                     />
-                    {loading && <img className="loader" src={Loader} />}
+                    {loading && <img className="loader" src={Loader}/>}
                 </div>
                 {focus && (
                     <div className="countries-list">
                         {filteredCountries.map(deelCountry => (
-                            <div
-                                className="countries-list-item"
-                                onMouseDown={onItemClick(deelCountry)} // Using onMouseDown here instead of click for proper work with onBlur
-                            >
-                                {deelCountry}
-                            </div>
+                            <CountryItem country={deelCountry} searchValue={value} onItemClick={onItemClick}/>
                         ))}
                     </div>
                 )}

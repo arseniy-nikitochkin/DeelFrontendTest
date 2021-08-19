@@ -68,3 +68,7 @@ html, body {
 .input-container {
   position: relative;
 }
+
+.highlight {
+  background-color: #629bf8;
+}

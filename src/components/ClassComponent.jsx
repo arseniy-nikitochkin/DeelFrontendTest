@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { sleep } from '../utils';
-import Loader from "../assets/oval.svg";
+import Loader from '../assets/oval.svg';
 
 const DATA = [
     'Israel',
@@ -12,6 +12,27 @@ const DATA = [
     'Brazil',
     'Colombia',
 ];
+
+class CountryItem extends React.Component {
+    render() {
+        const { country, searchValue, onItemClick } = this.props;
+        const startIndex = country.toLowerCase().indexOf(searchValue.toLowerCase());
+        const endIndex = startIndex + searchValue.length;
+
+        return (
+            <div
+                className="countries-list-item"
+                onMouseDown={onItemClick(country)} // Using onMouseDown here instead of click for proper work with onBlur
+            >
+                {country.substring(0, startIndex)}
+                <span className="highlight">
+                    {country.substring(startIndex, endIndex)}
+                </span>
+                {country.substring(endIndex, country.length)}
+            </div>
+        );
+    }
+}
 
 class ClassComponent extends React.Component {
     constructor(props) {
@@ -35,9 +56,9 @@ class ClassComponent extends React.Component {
         try {
             this.setState({ loading: true });
             const countries = await this.getData();
-            this.setState({countries, loading: false });
+            this.setState({ countries, loading: false });
         } catch (e) {
-            this.setState( { error: 'Something went wrong ', loading: false });
+            this.setState({ error: 'Something went wrong', loading: false });
         }
     }
 
@@ -56,11 +77,11 @@ class ClassComponent extends React.Component {
     }
 
     onFocus() {
-        this.setState( { hasFocus: true });
+        this.setState({ hasFocus: true });
     }
 
     onBlur() {
-        this.setState( { hasFocus: false });
+        this.setState({ hasFocus: false });
     }
 
     render() {
@@ -81,17 +102,16 @@ class ClassComponent extends React.Component {
                             onBlur={this.onBlur}
                             onChange={this.onInputChange}
                         />
-                        {this.state.loading && <img className="loader" src={Loader} />}
+                        {this.state.loading && <img className="loader" src={Loader}/>}
                     </div>
                     {this.state.hasFocus && (
                         <div className="countries-list">
                             {filteredCountries.map(deelCountry => (
-                                <div
-                                    className="countries-list-item"
-                                    onMouseDown={this.onItemClick(deelCountry)} // Using onMouseDown here instead of click for proper work with onBlur
-                                >
-                                    {deelCountry}
-                                </div>
+                                <CountryItem
+                                    country={deelCountry}
+                                    searchValue={this.state.value}
+                                    onItemClick={this.onItemClick}
+                                />
                             ))}
                         </div>
                     )}
