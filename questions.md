@@ -1,16 +1,16 @@
 
-1.What is the difference between Component and PureComponent? give an example where it might break my app.  
- PureComponent implements shouldComponentUpdate  lifecycle method using shallow comparison of state and props.
+1. What is the difference between Component and PureComponent? give an example where it might break my app.
+-PureComponent implements shouldComponentUpdate  lifecycle method using shallow comparison of state and props.
 If nothing has changed, then PureComponent doesn't rerender. But because it uses shallow comp., it may break when
 we have changes in deep nested data structures.  
-2.Context + ShouldComponentUpdate might be dangerous. Can think of why is that?  
+2. Context + ShouldComponentUpdate might be dangerous. Can think of why is that?  
 Because shouldComponentUpdate only checks for props and state changes, but a change in Context value Provider will cause a rerender anyway.  
 3. Describe 3 ways to pass information from a component to its PARENT.  
  -Define a callback which can change data in a parent, then send this callback to a child, using props or context  
  -Using refs and changing ref.current in a child component  
  -Use a state manager and connect parent and child to the same store or just use a shared global state  
 4. Give 2 ways to prevent components from re-rendering.  
- Use PureComponent/React.memo or implement shouldComponentUpdate
+ Use PureComponent/React.memo or implement shouldComponentUpdate  
 5. What is a fragment and why do we need it? Give an example where it might break my app.  
  Fragment is way to group several components without adding additional nodes to the DOM.
  Fragments may break your layout and styling when you get an unexpected amount of child components.
