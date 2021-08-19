@@ -4,7 +4,7 @@ PureComponent implements shouldComponentUpdate  lifecycle method using shallow c
 If nothing has changed, then PureComponent doesn't rerender. But because it uses shallow comp., it may break when
 we have changes in deep nested data structures.  
 2. Context + ShouldComponentUpdate might be dangerous. Can think of why is that?  
-Because shouldComponentUpdate only checks for props and state changes, but a change in Context value Provider will cause a rerender anyway.  
+That is because shouldComponentUpdate only checks for props and state changes, but a change in Context value Provider will cause a rerender anyway.  
 3. Describe 3 ways to pass information from a component to its PARENT.  
  -Define a callback which can change data in a parent, then send this callback to a child, using props or context  
  -Using refs and changing ref.current in a child component  
@@ -12,7 +12,7 @@ Because shouldComponentUpdate only checks for props and state changes, but a cha
 4. Give 2 ways to prevent components from re-rendering.  
  Use PureComponent/React.memo or implement shouldComponentUpdate  
 5. What is a fragment and why do we need it? Give an example where it might break my app.  
- Fragment is way to group several components without adding additional nodes to the DOM.
+ Fragment is a way to group several components without adding additional nodes to the DOM.
  Fragments may break your layout and styling when you get an unexpected amount of child components.
 6. Give 3 examples of the HOC pattern. 
   ```
@@ -86,7 +86,7 @@ function logger(WrappedComponent) {
   -Replace constructor state initialization  with useState hook  
   -Replace lifecycle methods with useEffect hook(s)  
   -Replace methods with functions wrapped in useCallbacks  
-  -Make the body of render() method the body of your Functional Component  
+  -Make the body of render() method to be the body of your Functional Component  
 11. List a few ways styles can be used with components.  
     -Inline styles  
     -normal css classNames  
