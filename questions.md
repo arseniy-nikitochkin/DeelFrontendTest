@@ -1,6 +1,6 @@
 
-1. What is the difference between Component and PureComponent? give an example where it might break my app.
--PureComponent implements shouldComponentUpdate  lifecycle method using shallow comparison of state and props.
+1. What is the difference between Component and PureComponent? give an example where it might break my app.  
+PureComponent implements shouldComponentUpdate  lifecycle method using shallow comparison of state and props.
 If nothing has changed, then PureComponent doesn't rerender. But because it uses shallow comp., it may break when
 we have changes in deep nested data structures.  
 2. Context + ShouldComponentUpdate might be dangerous. Can think of why is that?  
@@ -81,17 +81,17 @@ function logger(WrappedComponent) {
  setState has 2 arguments: setState(updater, [callback]). Callback is invoked after an asynchronous update is completed. 
  setState is async because React batches state updates, and then makes a single update for several components at once.
 10. List the steps needed to migrate a Class to Function Component.   
-  -Rename Class signature to a function signature
-  -If your class Component was Pure, wrap your function with React.memo()
-  -Replace constructor state initialization  with useState hook
-  -Replace lifecycle methods with useEffect hook(s)
-  -Replace methods with functions wrapped in useCallbacks
-  -Make the body of render() method the body of your Functional Component
+  -Rename Class signature to a function signature  
+  -If your class Component was Pure, wrap your function with React.memo()  
+  -Replace constructor state initialization  with useState hook  
+  -Replace lifecycle methods with useEffect hook(s)  
+  -Replace methods with functions wrapped in useCallbacks  
+  -Make the body of render() method the body of your Functional Component  
 11. List a few ways styles can be used with components.  
-    -Inline styles
-    -normal css classNames
-    -styled components(css in js)
-    -css modules
+    -Inline styles  
+    -normal css classNames  
+    -styled components(css in js)  
+    -css modules  
 12. How to render an HTML string coming from the server.  
     Using div with dangerouslySetInnerHTML attribute, or using a 3rd party HTML parser:
     
