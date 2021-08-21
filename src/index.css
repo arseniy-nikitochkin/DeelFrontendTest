@@ -37,6 +37,17 @@ html, body {
   margin-top: 2px;
   position: absolute;
   box-shadow: 0 10px 20px 0px rgba(0,0,0, 0.2);
+
+  animation: blink 300ms;
+}
+
+@keyframes blink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .countries-list-item {
