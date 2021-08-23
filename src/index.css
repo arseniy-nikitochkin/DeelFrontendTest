@@ -36,7 +36,7 @@ html, body {
   width: 416px;
   margin-top: 2px;
   position: absolute;
-  box-shadow: 0 10px 20px 0px rgba(0,0,0, 0.2);
+  box-shadow: 0 5px 10px 0px rgba(0,0,0, 0.07);
 
   animation: blink 300ms;
 }
