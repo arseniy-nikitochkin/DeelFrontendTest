@@ -74,6 +74,7 @@ class ClassComponent extends React.Component {
                             type="text"
                             className="countries-input"
                             value={value}
+                            disabled={loading}
                             onFocus={this.onFocus}
                             onBlur={this.onBlur}
                             onChange={this.onInputChange}

@@ -66,6 +66,7 @@ function HooksComponent() {
                         type="text"
                         className="countries-input"
                         value={value}
+                        disabled={loading}
                         onFocus={onFocus}
                         onBlur={onBlur}
                         onChange={onInputChange}
