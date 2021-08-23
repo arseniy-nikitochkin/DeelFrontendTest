@@ -1,6 +1,7 @@
 import React from 'react';
-import { sleep } from '../utils';
-import Loader from '../assets/oval.svg';
+import { sleep } from '../../utils';
+import Loader from '../../assets/oval.svg';
+import CountriesList from './CountriesList';
 
 const DATA = [
     'Israel',
@@ -12,31 +13,16 @@ const DATA = [
     'Colombia',
 ];
 
-const CountryItem = (props) => {
-    const { country, searchValue, onItemClick } = props;
-    const startIndex = country.toLowerCase().indexOf(searchValue.toLowerCase());
-    const endIndex = startIndex + searchValue.length;
-
-    return (
-        <div
-            className="countries-list-item"
-            onMouseDown={onItemClick(country)} // Using onMouseDown here instead of click for proper work with onBlur
-        >
-            {country.substring(0, startIndex)}
-            <span className="highlight">
-                {country.substring(startIndex, endIndex)}
-            </span>
-            {country.substring(endIndex, country.length)}
-        </div>
-    );
-}
-
 function HooksComponent() {
     const [countries, setCountries] = React.useState([]);
     const [value, setValue] = React.useState('');
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState('');
     const [focus, setFocus] = React.useState(false);
+
+    const filteredCountries = countries.filter(country => {
+        return country.toLowerCase().includes(value.toLowerCase())
+    });
 
     const getData = async () => {
         await sleep(1000);
@@ -60,10 +46,7 @@ function HooksComponent() {
 
     const onInputChange = React.useCallback((event) => {
         setValue(event.target.value);
-    }, []);
-
-    const onItemClick = React.useCallback((value) => {
-        return () => setValue(value);
+        setFocus(true);
     }, []);
 
     const onFocus = React.useCallback(() => {
@@ -73,10 +56,6 @@ function HooksComponent() {
     const onBlur = React.useCallback(() => {
         setFocus(false);
     }, []);
-
-    const filteredCountries = countries.filter(country => {
-        return country.toLowerCase().includes(value.toLowerCase())
-    });
 
     return (
         <div>
@@ -94,11 +73,12 @@ function HooksComponent() {
                     {loading && <img className="loader" src={Loader}/>}
                 </div>
                 {focus && (
-                    <div className="countries-list">
-                        {filteredCountries.map(deelCountry => (
-                            <CountryItem country={deelCountry} searchValue={value} onItemClick={onItemClick}/>
-                        ))}
-                    </div>
+                    <CountriesList
+                        filteredCountries={filteredCountries}
+                        value={value}
+                        setValue={setValue}
+                        setFocus={setFocus}
+                    />
                 )}
                 {error && (
                     <div className="error">{error}</div>

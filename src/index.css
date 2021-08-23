@@ -55,12 +55,12 @@ html, body {
   font-size: 18px;
   padding: 7px;
   border-radius: 2px;
+  cursor: pointer;
 }
 
-.countries-list-item:hover {
+.countries-list-item-selected {
   background-color: #2c71f0;
   color: #fff;
-  cursor: pointer;
 }
 
 .error {
